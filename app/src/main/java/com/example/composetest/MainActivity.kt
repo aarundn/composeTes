@@ -41,7 +41,7 @@ data class Message(val author: String, val body: String)
 @Composable
 fun MessageCard(name: Message) {
     Row (
-        modifier = Modifier.padding(all = 10.dp)
+        modifier = Modifier.padding(all = 11.dp)
     ) {
         Image(
             painter = painterResource(R.drawable.ic_launcher_background),
