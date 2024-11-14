@@ -38,11 +38,14 @@ class MainActivity : ComponentActivity() {
 }
 
 data class Message(val author: String, val body: String)
+
 @Composable
 fun MessageCard(name: Message) {
-    Row (
-        modifier = Modifier.padding(all = 11.dp)
+
+    Row(
+        modifier = Modifier.padding(all = 8.dp)
     ) {
+        Spacer(modifier = Modifier.width(24.dp))
         Image(
             painter = painterResource(R.drawable.ic_launcher_background),
             contentDescription = "Contact profile picture",
@@ -55,7 +58,12 @@ fun MessageCard(name: Message) {
         Spacer(modifier = Modifier.width(8.dp))
         Column {
 
-            Text(text = name.author)
+            Text(
+                text = name.author,
+                modifier = Modifier
+                    .size(34.dp)
+                    .padding(top = 8.dp)
+            )
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = name.body)
         }
