@@ -10,6 +10,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,6 +43,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -87,7 +92,83 @@ private fun Greetings(
         }
     }
 }
+@Composable
+fun AnimeStyleCharacter(modifier: Modifier = Modifier) {
+    Canvas(modifier = modifier) {
+        // Draw Head
+        drawCircle(
+            color = Color(0xFFFAD6A5),
+            center = center.copy(y = center.y - 150),
+            radius = 100f
+        )
 
+        // Draw Hair (spiky style)
+        drawPath(
+            color = Color.Black,
+            path = Path().apply {
+                moveTo(center.x, center.y - 250) // Top spike
+                lineTo(center.x - 50, center.y - 150)
+                lineTo(center.x + 50, center.y - 150)
+                close()
+
+                moveTo(center.x - 70, center.y - 200) // Left spike
+                lineTo(center.x - 100, center.y - 100)
+                lineTo(center.x - 20, center.y - 150)
+                close()
+
+                moveTo(center.x + 70, center.y - 200) // Right spike
+                lineTo(center.x + 100, center.y - 100)
+                lineTo(center.x + 20, center.y - 150)
+                close()
+            }
+        )
+
+        // Draw Body
+        drawRect(
+            color = Color(0xFF3F51B5), // Blue outfit
+            topLeft = center.copy(x = center.x - 60, y = center.y - 50),
+            size = Size(120f, 150f)
+        )
+
+        // Draw Arms
+        drawRoundRect(
+            color = Color(0xFFFAD6A5), // Skin color
+            topLeft = center.copy(x = center.x - 90, y = center.y - 40),
+            size = Size(30f, 100f),
+            cornerRadius = CornerRadius(15f)
+        )
+        drawRoundRect(
+            color = Color(0xFFFAD6A5),
+            topLeft = center.copy(x = center.x + 60, y = center.y - 40),
+            size = Size(30f, 100f),
+            cornerRadius = CornerRadius(15f)
+        )
+
+        // Draw Legs
+        drawRoundRect(
+            color = Color.Black, // Black pants
+            topLeft = center.copy(x = center.x - 40, y = center.y + 100),
+            size = Size(40f, 120f),
+            cornerRadius = CornerRadius(10f)
+        )
+        drawRoundRect(
+            color = Color.Black,
+            topLeft = center.copy(x = center.x, y = center.y + 100),
+            size = Size(40f, 120f),
+            cornerRadius = CornerRadius(10f)
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun AnimeStyleCharacterPreview() {
+    AnimeStyleCharacter(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    )
+}
 @Composable
 fun OnboardingScreen(
     onContinueClicked: () -> Unit,

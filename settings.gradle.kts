@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeTest"
 include(":app")
- 
+include(":challenge2")
