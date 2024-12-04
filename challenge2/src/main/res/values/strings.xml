@@ -2,4 +2,6 @@
     <string name="app_name">challenge2</string>
     <string name="placeholder_search">Search</string>
     <string name="ab1_inversions">inversions</string>
+    <string name="align_your_body">Align your Body</string>
+    <string name="favorite_collections">Favorite collection</string>
 </resources>
