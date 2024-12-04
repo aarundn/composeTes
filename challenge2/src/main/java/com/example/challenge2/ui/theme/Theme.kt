@@ -12,22 +12,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
-private val DarkColorScheme = darkColorScheme(
-    surface = Blue,
-    onSurface = Navy,
-    primary = Navy,
-    onPrimary = Chartreuse
+private val CustomLightColorScheme = lightColorScheme(
+    primary = MagentaAccent,
+    secondary = DeepPurpleDark,
+    tertiary = OrangeBright,
+    background = DeepPurpleBg,
+    surface = DeepPurpleBg,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onBackground = Color.White,
+    onSurface = Color.White
 )
 
-private val LightColorScheme = lightColorScheme(
-    surface = Blue,
-    onSurface = Color.White,
-    primary = LightBlue,
-    onPrimary = Navy
+private val CustomDarkColorScheme = darkColorScheme(
+    primary = MagentaAccent,
+    secondary = DeepPurpleDark,
+    tertiary = OrangeBright,
+    background = DeepPurpleBg,
+    surface = DeepPurpleBg,
+    onPrimary = Color.White,
+    onSecondary = Color.White,
+    onBackground = Color.White,
+    onSurface = Color.White
 )
 
 @Composable
@@ -38,8 +47,8 @@ fun ComposeTestTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> CustomDarkColorScheme
+        else -> CustomLightColorScheme
     }
 
     val view = LocalView.current

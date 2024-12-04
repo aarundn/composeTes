@@ -58,7 +58,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTestTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                        MySootheAppPortrait()
+                    MySootheAppPortrait()
                 }
 
             }
@@ -114,7 +114,7 @@ fun FavoriteCollectionCard(
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surfaceVariant,
+        color = MaterialTheme.colorScheme.surface,
         modifier = modifier
     ) {
         Row(
@@ -129,7 +129,8 @@ fun FavoriteCollectionCard(
             )
             Text(
                 text = stringResource(text),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
@@ -174,6 +175,7 @@ val favoriteCollectionsData = listOf(
     FavoriteCollectionData(R.drawable.image4, R.string.ab1_inversions),
     FavoriteCollectionData(R.drawable.image5, R.string.ab1_inversions),
 )
+
 @Preview(showBackground = true)
 @Composable
 fun SearchBar(
@@ -185,15 +187,22 @@ fun SearchBar(
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = null
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSecondary
             )
         },
         colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-            focusedContainerColor = MaterialTheme.colorScheme.surface
+            unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
+            focusedContainerColor = MaterialTheme.colorScheme.secondary,
+            cursorColor = MaterialTheme.colorScheme.onSecondary,
+            focusedIndicatorColor = MaterialTheme.colorScheme.tertiary,
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.tertiary
         ),
         placeholder = {
-            Text(stringResource(R.string.placeholder_search))
+            Text(
+                text = stringResource(R.string.placeholder_search),
+                color = MaterialTheme.colorScheme.onSecondary
+            )
         },
         modifier = modifier
             .padding(12.dp)
@@ -201,6 +210,7 @@ fun SearchBar(
             .heightIn(min = 56.dp)
     )
 }
+
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
     Column(
@@ -218,6 +228,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         Spacer(Modifier.height(16.dp))
     }
 }
+
 @Composable
 fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
@@ -247,19 +258,22 @@ fun AlignYourBodyElement(
 @Composable
 private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
         modifier = modifier
     ) {
         NavigationBarItem(
             icon = {
                 Icon(
                     imageVector = Icons.Default.Settings,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
                 Text(
-                    text = stringResource(R.string.bottom_navigation_home)
+                    text = stringResource(R.string.bottom_navigation_home),
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = true,
@@ -269,12 +283,14 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
             icon = {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
                 Text(
-                    text = stringResource(R.string.bottom_navigation_profile)
+                    text = stringResource(R.string.bottom_navigation_profile),
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -282,6 +298,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
         )
     }
 }
+
 @Composable
 fun MySootheAppPortrait() {
     ComposeTestTheme {
@@ -292,6 +309,7 @@ fun MySootheAppPortrait() {
         }
     }
 }
+
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun AlignYourBodyElementPreview() {
@@ -323,6 +341,7 @@ fun HomeSectionPreview() {
         }
     }
 }
+
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, heightDp = 180)
 @Composable
 fun ScreenContentPreview() {
