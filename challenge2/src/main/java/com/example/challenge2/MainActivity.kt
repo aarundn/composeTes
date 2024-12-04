@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -30,6 +32,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -55,20 +58,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeTestTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
-                    Column(modifier = Modifier.padding(8.dp)) {
-                        SearchBar()
-                        AlignYourBodyElement(
-                            text = R.string.ab1_inversions,
-                            drawable = R.drawable.image1,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                        FavoriteCollectionCard(
-                            text = R.string.ab1_inversions,
-                            drawable = R.drawable.image1,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                        AlignYourBodyRow(alignYourBodyData = alignYourBodyData)
-                    }
+                        MySootheAppPortrait()
                 }
 
             }
@@ -98,23 +88,7 @@ fun HomeSection(
         content()
     }
 }
-@Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    Column(
-        modifier
-            .verticalScroll(rememberScrollState())
-    ) {
-        Spacer(Modifier.height(16.dp))
-        SearchBar(Modifier.padding(horizontal = 16.dp))
-        HomeSection(title = R.string.align_your_body) {
-            AlignYourBodyRow(alignYourBodyData = alignYourBodyData)
-        }
-        HomeSection(title = R.string.favorite_collections) {
-            FavoriteCollectionsGrid(modifier = modifier, favoriteCollectionsData = alignYourBodyData)
-        }
-        Spacer(Modifier.height(16.dp))
-    }
-}
+
 @Composable
 fun AlignYourBodyRow(
     modifier: Modifier = Modifier,
@@ -168,18 +142,12 @@ val alignYourBodyData = listOf(
     AlignYourBodyData(R.drawable.image3, R.string.ab1_inversions),
     AlignYourBodyData(R.drawable.image4, R.string.ab1_inversions),
     AlignYourBodyData(R.drawable.image5, R.string.ab1_inversions),
-    AlignYourBodyData(R.drawable.image1, R.string.ab1_inversions),
-    AlignYourBodyData(R.drawable.image2, R.string.ab1_inversions),
-    AlignYourBodyData(R.drawable.image3, R.string.ab1_inversions),
-    AlignYourBodyData(R.drawable.image4, R.string.ab1_inversions),
-    AlignYourBodyData(R.drawable.image5, R.string.ab1_inversions)
 )
 
 
 @Composable
 fun FavoriteCollectionsGrid(
-    modifier: Modifier = Modifier,
-    favoriteCollectionsData: List<AlignYourBodyData>
+    modifier: Modifier = Modifier
 ) {
     LazyHorizontalGrid(
         rows = GridCells.Fixed(2),
@@ -189,7 +157,7 @@ fun FavoriteCollectionsGrid(
         modifier = modifier.height(168.dp)
     ) {
         items(favoriteCollectionsData) { item ->
-            FavoriteCollectionCard(item.drawable, item.text, modifier.height(80.dp))
+            FavoriteCollectionCard(item.drawable, item.text, Modifier.height(80.dp))
         }
     }
 }
@@ -199,6 +167,13 @@ data class FavoriteCollectionData(
     @StringRes val text: Int
 )
 
+val favoriteCollectionsData = listOf(
+    FavoriteCollectionData(R.drawable.image1, R.string.ab1_inversions),
+    FavoriteCollectionData(R.drawable.image2, R.string.ab1_inversions),
+    FavoriteCollectionData(R.drawable.image3, R.string.ab1_inversions),
+    FavoriteCollectionData(R.drawable.image4, R.string.ab1_inversions),
+    FavoriteCollectionData(R.drawable.image5, R.string.ab1_inversions),
+)
 @Preview(showBackground = true)
 @Composable
 fun SearchBar(
@@ -226,7 +201,23 @@ fun SearchBar(
             .heightIn(min = 56.dp)
     )
 }
-
+@Composable
+fun HomeScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier
+            .verticalScroll(rememberScrollState())
+    ) {
+        Spacer(Modifier.height(16.dp))
+        SearchBar(Modifier.padding(horizontal = 16.dp))
+        HomeSection(title = R.string.align_your_body) {
+            AlignYourBodyRow(alignYourBodyData = alignYourBodyData)
+        }
+        HomeSection(title = R.string.favorite_collections) {
+            FavoriteCollectionsGrid(modifier = modifier)
+        }
+        Spacer(Modifier.height(16.dp))
+    }
+}
 @Composable
 fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
@@ -253,6 +244,54 @@ fun AlignYourBodyElement(
     }
 }
 
+@Composable
+private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(R.string.bottom_navigation_home)
+                )
+            },
+            selected = true,
+            onClick = {}
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = null
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(R.string.bottom_navigation_profile)
+                )
+            },
+            selected = false,
+            onClick = {}
+        )
+    }
+}
+@Composable
+fun MySootheAppPortrait() {
+    ComposeTestTheme {
+        Scaffold(
+            bottomBar = { SootheBottomNavigation() }
+        ) { padding ->
+            HomeScreen(Modifier.padding(padding))
+        }
+    }
+}
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun AlignYourBodyElementPreview() {
@@ -270,7 +309,6 @@ fun AlignYourBodyElementPreview() {
 fun FavoriteCollectionCardPreview() {
     ComposeTestTheme {
         FavoriteCollectionsGrid(
-            favoriteCollectionsData = alignYourBodyData,
             modifier = Modifier.padding(8.dp)
         )
     }
@@ -288,5 +326,5 @@ fun HomeSectionPreview() {
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, heightDp = 180)
 @Composable
 fun ScreenContentPreview() {
-    ComposeTestTheme { HomeScreen() }
+    ComposeTestTheme { MySootheAppPortrait() }
 }
