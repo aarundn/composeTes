@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material.icons.filled.AccountCircle
@@ -35,11 +36,17 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,14 +59,14 @@ import androidx.compose.ui.unit.dp
 import com.example.challenge2.ui.theme.ComposeTestTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             ComposeTestTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    MySootheAppPortrait()
-                }
+                val windowSizeClass = calculateWindowSizeClass(this)
+                MySootheApp(windowSizeClass)
 
             }
         }
@@ -114,7 +121,6 @@ fun FavoriteCollectionCard(
 ) {
     Surface(
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colorScheme.surface,
         modifier = modifier
     ) {
         Row(
@@ -130,7 +136,6 @@ fun FavoriteCollectionCard(
             Text(
                 text = stringResource(text),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
@@ -188,16 +193,8 @@ fun SearchBar(
             Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSecondary
             )
         },
-        colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = MaterialTheme.colorScheme.secondary,
-            focusedContainerColor = MaterialTheme.colorScheme.secondary,
-            cursorColor = MaterialTheme.colorScheme.onSecondary,
-            focusedIndicatorColor = MaterialTheme.colorScheme.tertiary,
-            unfocusedIndicatorColor = MaterialTheme.colorScheme.tertiary
-        ),
         placeholder = {
             Text(
                 text = stringResource(R.string.placeholder_search),
@@ -258,8 +255,6 @@ fun AlignYourBodyElement(
 @Composable
 private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     NavigationBar(
-        containerColor = MaterialTheme.colorScheme.primary,
-        contentColor = MaterialTheme.colorScheme.onPrimary,
         modifier = modifier
     ) {
         NavigationBarItem(
@@ -267,13 +262,11 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.Settings,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
                 Text(
                     text = stringResource(R.string.bottom_navigation_home),
-                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = true,
@@ -284,13 +277,11 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             },
             label = {
                 Text(
                     text = stringResource(R.string.bottom_navigation_profile),
-                    color = MaterialTheme.colorScheme.onPrimary
                 )
             },
             selected = false,
@@ -298,7 +289,46 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
         )
     }
 }
-
+@Composable
+private fun SootheNavigationRail(modifier: Modifier = Modifier) {
+    NavigationRail(
+        modifier = modifier.padding(start = 8.dp, end = 8.dp),
+    ) {
+        Column(
+            modifier = modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = null
+                    )
+                },
+                label = {
+                    Text(stringResource(R.string.bottom_navigation_home))
+                },
+                selected = true,
+                onClick = {}
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            NavigationRailItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = null
+                    )
+                },
+                label = {
+                    Text(stringResource(R.string.bottom_navigation_profile))
+                },
+                selected = false,
+                onClick = {}
+            )
+        }
+    }
+}
 @Composable
 fun MySootheAppPortrait() {
     ComposeTestTheme {
@@ -309,8 +339,18 @@ fun MySootheAppPortrait() {
         }
     }
 }
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+fun MySootheAppLandscape() {
+    ComposeTestTheme {
+        Surface(color = MaterialTheme.colorScheme.primary) {
+            Row {
+                SootheNavigationRail()
+                HomeScreen()
+            }
+        }
+    }
+}
+        @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun AlignYourBodyElementPreview() {
     ComposeTestTheme {
@@ -321,7 +361,17 @@ fun AlignYourBodyElementPreview() {
         )
     }
 }
-
+@Composable
+fun MySootheApp(windowSize: WindowSizeClass) {
+    when (windowSize.widthSizeClass) {
+        WindowWidthSizeClass.Compact -> {
+            MySootheAppPortrait()
+        }
+        WindowWidthSizeClass.Expanded -> {
+            MySootheAppLandscape()
+        }
+    }
+}
 @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
 @Composable
 fun FavoriteCollectionCardPreview() {

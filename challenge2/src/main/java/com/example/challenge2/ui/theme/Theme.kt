@@ -28,11 +28,10 @@ private val CustomLightColorScheme = lightColorScheme(
 )
 
 private val CustomDarkColorScheme = darkColorScheme(
-    primary = MagentaAccent,
-    secondary = DeepPurpleDark,
+    primary = DeepPurpleDark,
     tertiary = OrangeBright,
     background = DeepPurpleBg,
-    surface = DeepPurpleBg,
+    surface = MagentaAccent,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onBackground = Color.White,
@@ -46,6 +45,7 @@ fun ComposeTestTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+
     val colorScheme = when {
         darkTheme -> CustomDarkColorScheme
         else -> CustomLightColorScheme
@@ -55,7 +55,7 @@ fun ComposeTestTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val activity = view.context as Activity
-            activity.window.statusBarColor = colorScheme.primary.toArgb()
+            activity.window.statusBarColor = colorScheme.background.toArgb()
             // Set the status bar icons color based on the theme
             ViewCompat.getWindowInsetsController(activity.window.decorView)?.isAppearanceLightStatusBars = !darkTheme
         }
