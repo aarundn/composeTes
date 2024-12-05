@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "ComposeTest"
 include(":app")
 include(":challenge2")
+include(":challenge3")
