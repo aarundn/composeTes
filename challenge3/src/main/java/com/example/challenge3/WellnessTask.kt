@@ -15,10 +15,3 @@ class WellnessTask(
 ) {
     var checked by mutableStateOf(initialChecked)
 }
-
-@Composable
-fun df(modifier: Modifier = Modifier) {
-    Row {
-
-    }
-}
