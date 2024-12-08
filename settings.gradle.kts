@@ -23,3 +23,4 @@ rootProject.name = "ComposeTest"
 include(":app")
 include(":challenge2")
 include(":challenge3")
+include(":challenge4")
