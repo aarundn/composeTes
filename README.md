@@ -1,3 +1,4 @@
+# بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
 # My Jetpack Compose Journey 🚀
 
 Welcome to my **Jetpack Compose Learning Challenge** repository! 🎉 Over the next month, I will dive deep into learning Jetpack Compose, completing daily challenges from **CodLabs**, and applying what I learn to create simple yet functional apps. By the end of this journey, my goal is to build a **professional-grade application** using Jetpack Compose and share it here on GitHub.
