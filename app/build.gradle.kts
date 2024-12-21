@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.composetest"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.composetest"

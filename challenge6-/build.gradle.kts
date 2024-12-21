@@ -1,11 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id ("dagger.hilt.android.plugin")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "com.example.challenge6_"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.challenge6_"
@@ -59,6 +61,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.hilt.android)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -66,4 +70,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    val lifecycle_version = "2.8.7"
+    implementation (libs.androidx.lifecycle.viewmodel.compose)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.hilt.android)
+
+    implementation (libs.coil.compose)
+
+    implementation (libs.jetbrains.kotlinx.coroutines.android.v1100)
+    implementation (libs.maps)
+    implementation (libs.maps.v3.ktx)
+    constraints {
+        // Volley is a transitive dependency of maps
+        implementation("com.android.volley:volley:1.2.1") {
+            because("Only volley 1.2.0 or newer are available on maven.google.com")
+        }
+    }
 }
