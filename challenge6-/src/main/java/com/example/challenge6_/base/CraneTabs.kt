@@ -25,13 +25,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.samples.crane.R
-import androidx.compose.samples.crane.home.CraneScreen
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +38,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.os.ConfigurationCompat
+import com.example.challenge6_.R
+import com.example.challenge6_.home.CraneScreen
 
 @Composable
 fun CraneTabBar(
@@ -81,7 +81,7 @@ fun CraneTabs(
     TabRow(
         selectedTabIndex = tabSelected.ordinal,
         modifier = modifier,
-        contentColor = MaterialTheme.colors.onSurface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         indicator = { },
         divider = { }
     ) {

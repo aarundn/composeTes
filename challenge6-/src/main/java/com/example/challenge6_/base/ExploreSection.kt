@@ -35,17 +35,11 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.samples.crane.R
-import androidx.compose.samples.crane.data.ExploreModel
-import androidx.compose.samples.crane.home.OnExploreItemClicked
-import androidx.compose.samples.crane.ui.BottomSheetShape
-import androidx.compose.samples.crane.ui.crane_caption
-import androidx.compose.samples.crane.ui.crane_divider_color
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,6 +50,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest.Builder
+import com.example.challenge6_.R
+import com.example.challenge6_.data.ExploreModel
+import com.example.challenge6_.home.OnExploreItemClicked
+import com.example.challenge6_.ui.BottomSheetShape
+import com.example.challenge6_.ui.crane_caption
+import com.example.challenge6_.ui.crane_divider_color
 
 
 @Composable
@@ -69,7 +69,7 @@ fun ExploreSection(
         Column(modifier = Modifier.padding(start = 24.dp, top = 20.dp, end = 24.dp)) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.caption.copy(color = crane_caption)
+                style = MaterialTheme.typography.titleMedium.copy(color = crane_caption)
             )
             Spacer(Modifier.height(8.dp))
             // TODO Codelab: derivedStateOf step
@@ -146,12 +146,12 @@ private fun ExploreItem(
         Column {
             Text(
                 text = item.city.nameToDisplay,
-                style = MaterialTheme.typography.h6
+                style = MaterialTheme.typography.headlineSmall
             )
             Spacer(Modifier.height(8.dp))
             Text(
                 text = item.description,
-                style = MaterialTheme.typography.caption.copy(color = crane_caption)
+                style = MaterialTheme.typography.titleLarge.copy(color = crane_caption)
             )
         }
     }

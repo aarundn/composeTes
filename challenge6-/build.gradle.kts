@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id ("dagger.hilt.android.plugin")
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -12,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "com.example.challenge6_"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -37,6 +39,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf("-Xsuppress-version-warnings")
     }
     buildFeatures {
         compose = true
@@ -75,7 +78,7 @@ dependencies {
     implementation (libs.androidx.lifecycle.viewmodel.compose)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     implementation (libs.hilt.android)
-
+    kapt (libs.hilt.compiler)
     implementation (libs.coil.compose)
 
     implementation (libs.jetbrains.kotlinx.coroutines.android.v1100)
@@ -87,4 +90,7 @@ dependencies {
             because("Only volley 1.2.0 or newer are available on maven.google.com")
         }
     }
+}
+kapt {
+    correctErrorTypes = true
 }

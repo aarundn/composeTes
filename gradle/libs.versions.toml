@@ -11,7 +11,7 @@ hiltCompiler = "2.53.1"
 hiltCompilerVersion = "2.53.1"
 jetbrainsKotlinxCoroutinesAndroid = "1.10.0"
 junitKtx = "1.2.1"
-kotlin = "2.0.20"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -24,6 +24,7 @@ composeBom = "2024.12.01"
 lifecycleViewmodelCompose = "2.8.7"
 lifecycleViewmodelKtx = "2.8.7"
 maps = "3.1.0-beta"
+kapt = "2.1.0"
 mapsV3Ktx = "3.4.0"
 materialIconsCoreAndroid = "1.7.6"
 roomKtx = "2.6.1"
@@ -31,7 +32,8 @@ rules = "1.6.1"
 runner = "1.6.2"
 tracing = "1.2.0"
 playServicesMaps = "19.0.0"
-
+hilt = "2.52"
+ksp = "2.1.0-1.0.29"
 [libraries]
 androidx-animation = { module = "androidx.compose.animation:animation" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
@@ -84,5 +86,7 @@ play-services-maps = { group = "com.google.android.gms", name = "play-services-m
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kapt" }
+dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

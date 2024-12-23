@@ -9,16 +9,12 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/advancedstateandsideeffectscodelab" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/challenge2" />
             <option value="$PROJECT_DIR$/challenge3" />
             <option value="$PROJECT_DIR$/challenge4" />
             <option value="$PROJECT_DIR$/challenge5" />
-            <option value="$PROJECT_DIR$/challenge6" />
             <option value="$PROJECT_DIR$/challenge6-" />
-            <option value="$PROJECT_DIR$/challenge6_" />
-            <option value="$PROJECT_DIR$/challenge_6" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

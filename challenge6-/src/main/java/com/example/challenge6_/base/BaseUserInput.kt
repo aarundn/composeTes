@@ -22,24 +22,21 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.samples.crane.R
-import androidx.compose.samples.crane.ui.CraneTheme
-import androidx.compose.samples.crane.ui.captionTextStyle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.challenge6_.R
+import com.example.challenge6_.ui.CraneTheme
+import com.example.challenge6_.ui.captionTextStyle
 
 @Composable
 fun SimpleUserInput(
@@ -71,11 +68,10 @@ fun CraneUserInput(
         tintIcon = { text.isNotEmpty() },
         tint = tint
     ) {
-        Text(text = text, style = MaterialTheme.typography.body1.copy(color = tint))
+        Text(text = text, style = MaterialTheme.typography.bodyMedium.copy(color = tint))
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CraneBaseUserInput(
     modifier: Modifier = Modifier,
@@ -90,7 +86,7 @@ fun CraneBaseUserInput(
     Surface(
         modifier = modifier,
         onClick = onClick,
-        color = MaterialTheme.colors.primaryVariant
+        color = MaterialTheme.colorScheme.primaryContainer
     ) {
         Row(Modifier.padding(all = 12.dp)) {
             if (vectorImageId != null) {
@@ -132,7 +128,7 @@ fun PreviewInput() {
                 caption = "Caption",
                 showCaption = { true }
             ) {
-                Text(text = "text", style = MaterialTheme.typography.body1)
+                Text(text = "text", style = MaterialTheme.typography.bodyMedium)
             }
         }
     }
